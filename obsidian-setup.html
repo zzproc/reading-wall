@@ -91,17 +91,30 @@
 <p>切到 <code>读书</code> 这个仓库，应该能看到卡片和音频了。
 <strong>如果看到的是空的</strong>，回 GitSync 点一下 <strong>Sync Now</strong>，再回 Obsidian 看。</p>
 
-<h2><span class="n">6</span>设成自动同步（用「快捷指令」）</h2>
+<h2><span class="n">6</span>设成自动同步（可选，但强烈建议）</h2>
+<div class="box">
+  <b>不设也能用</b>
+  只是每次读之前，要先去 GitSync 点一下 <strong>Sync Now</strong>。设了就不用管了。
+</div>
 <ol>
-  <li>打开 iPhone 的 <strong>快捷指令</strong> App → 底部 <strong>自动化</strong></li>
-  <li>新建自动化 → 触发条件选 <strong>App</strong> → <strong>打开时</strong>（也可加"关闭时"）</li>
-  <li>App 选 <strong>Obsidian</strong></li>
-  <li>动作搜索 <strong>GitSync</strong> → 选 <strong>Sync Now</strong></li>
-  <li>关掉「运行前询问」，保存</li>
+  <li>打开 iPhone 的 <strong>快捷指令</strong> App（图标是个彩色方块叠方块）</li>
+  <li>底部切到 <strong>自动化</strong> 标签（不是"快捷指令"那个标签）</li>
+  <li>右上角点 <strong>＋</strong> → 新建自动化</li>
+  <li>触发器列表里找 <strong>App</strong>，点它</li>
+  <li>出现的 "App" 那一行点下去 → 搜索框输 <code>Obsidian</code> → 选中它</li>
+  <li>下面选 <strong>已打开</strong>（"已关闭"可以不选）</li>
+  <li>点 <strong>下一步</strong></li>
+  <li>搜索框输 <code>GitSync</code> → 在结果里找 <strong>Sync Now</strong> → 点一下，它就加为动作了</li>
+  <li><strong>把「运行前询问」关掉</strong> ← 关键，不关的话每次都会弹窗问你"要不要运行"</li>
+  <li>右上角 <strong>完成</strong></li>
 </ol>
 <div class="box ok">
-  <b>做到这一步就全通了</b>
-  以后你每次打开 Obsidian，它自动同步一次。罗辑在电脑上推了新卡片，你打开就能看到。
+  <b>验证一下</b>
+  回主屏，点开 Obsidian。GitSync 会弹一条通知说正在同步；回到 Obsidian，如果罗辑新推了卡片，就出现了。
+</div>
+<div class="box warn">
+  <b>第 4 步找不到 App，或第 8 步搜不到 GitSync</b>
+  截个图给罗辑。<strong>iOS 版本不同，触发器和动作的位置会变</strong>——我按你实际看到的界面说。
 </div>
 
 <h2>卡住了怎么办</h2>
