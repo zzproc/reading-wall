@@ -36,7 +36,7 @@
 <body><div class="wrap">
 <header>
   <b>Obsidian 手机端同步 · 操作手册</b>
-  <p>GitSync 方案 ｜ 全程不用生成令牌、不用装插件 ｜ 约 10 分钟</p>
+  <p>GitSync 方案 ｜ 不用 OAuth、不用生成令牌、不用装插件 ｜ 约 10 分钟</p>
 </header>
 
 <div class="box warn">
@@ -73,14 +73,14 @@
   <tr><td><strong>Choose your focus</strong></td><td>选 <strong>Sync mode</strong></td></tr>
   <tr><td>Premium / 付费页</td><td><strong>跳过</strong>，我们用不到</td></tr>
   <tr><td>要不要通知权限</td><td><strong>允许</strong>（它用来提示后台同步状态）</td></tr>
-  <tr><td>选认证方式</td><td>保持 <strong>GitHub</strong>，点 <strong>OAuth</strong> 按钮</td></tr>
-  <tr><td>浏览器里登录 GitHub</td><td>用你的 <code>zzproc</code> 账号授权</td></tr>
+  <tr><td>选认证方式</td><td><strong>不要选 OAuth</strong>，选 <strong>HTTPS / HTTP</strong>（有的版本叫 URL）</td></tr>
+  <tr><td>要用户名 / 密码？</td><td><strong>都留空</strong>——仓库已改成公开，公开仓库不需要认证</td></tr>
   <tr><td>Author details（用户名 / 邮箱）</td><td>填 <code>zzproc</code> 和你的 GitHub 邮箱</td></tr>
 </table>
 
 <h2><span class="n">4</span>克隆仓库</h2>
 <ol>
-  <li>OAuth 登录后，它会把你的仓库列出来 → <strong>选 <code>reading-vault</code></strong></li>
+  <li>仓库地址填：<code>https://github.com/zzproc/reading-vault.git</code></li>
   <li>问「选一个目录克隆进去」→ 选第 1 步建的那个 vault：<br>
       <code>我的 iPhone → Obsidian → 读书</code></li>
   <li>提示已存在内容、要不要覆盖 → <strong>选覆盖</strong></li>
@@ -107,7 +107,8 @@
 <h2>卡住了怎么办</h2>
 <table>
   <tr><th>现象</th><th>怎么办</th></tr>
-  <tr><td>GitSync 里看不到 <code>reading-vault</code></td><td>说明 OAuth 授权没给到私有仓库权限。退出 GitSync 重新授权一次</td></tr>
+  <tr><td><strong>OAuth 转圈出不来</strong></td><td>GitHub 的登录页在国内经常连不上。<strong>别用 OAuth</strong>，改用上面的 URL + 留空凭据——仓库已公开，不需要认证</td></tr>
+  <tr><td>它非要填密码才让继续</td><td>截图给我，我给你一个只读的仓库令牌（比 OAuth 更稳）</td></tr>
   <tr><td>克隆完 Obsidian 里还是空的</td><td>确认你打开的是第 1 步那个<strong>本地</strong> vault，不是 iCloud 那个</td></tr>
   <tr><td>提示文件夹非空</td><td>第 1 步没建干净。删掉那个 vault 重建一个空的</td></tr>
   <tr><td>还是报 <code>文件名不能包含 \ / :</code></td><td>把 obsidian-git 插件彻底卸掉再试——GitSync 不经过插件</td></tr>
