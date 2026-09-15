@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7c6cf0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Obsidian 手机端同步 · 操作手册</title>
+<style>
+  :root{--bg:#fff;--fg:#1f2328;--muted:#6b7280;--line:#e5e7eb;--accent:#7c6cf0;
+        --ok:#10b981;--warn:#f59e0b;--acbg:#f5f3ff;--okbg:#ecfdf5;--warnbg:#fffbeb}
+  @media (prefers-color-scheme:dark){:root{--bg:#16181c;--fg:#e6e6e6;--muted:#9aa0a6;
+        --line:#2c2f34;--acbg:#232136;--okbg:#16241f;--warnbg:#2a2318}}
+  *{box-sizing:border-box;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;
+    padding:0 0 env(safe-area-inset-bottom)}
+  .wrap{max-width:720px;margin:0 auto;padding:0 16px 48px}
+  header{border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top) + 14px) 0 14px;margin-bottom:8px}
+  header b{font-size:19px}
+  header p{color:var(--muted);font-size:13px;margin:4px 0 0}
+  h2{font-size:17px;margin:26px 0 10px;padding-top:6px}
+  h2 .n{display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--accent);
+        color:#fff;font-size:14px;align-items:center;justify-content:center;margin-right:8px;vertical-align:2px}
+  p{margin:9px 0}ol,ul{padding-left:22px;margin:9px 0}li{margin:7px 0}
+  code{background:color-mix(in srgb,var(--fg) 8%,transparent);padding:1px 5px;border-radius:4px;font-size:14px}
+  .box{border-left:3px solid var(--accent);background:var(--acbg);border-radius:8px;padding:11px 13px;margin:14px 0}
+  .box.warn{border-left-color:var(--warn);background:var(--warnbg)}
+  .box.ok{border-left-color:var(--ok);background:var(--okbg)}
+  .box b{display:block;margin-bottom:3px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:color-mix(in srgb,var(--fg) 4%,transparent);font-weight:650}
+  .muted{color:var(--muted);font-size:13.5px}
+  a{color:var(--accent)}
+</style></head>
+<body><div class="wrap">
+<header>
+  <b>Obsidian 手机端同步 · 操作手册</b>
+  <p>GitSync 方案 ｜ 全程不用生成令牌、不用装插件 ｜ 约 10 分钟</p>
+</header>
+
+<div class="box warn">
+  <b>先做一件事：把之前那个 vault 和 obsidian-git 插件都放一边</b>
+  你之前那次报错（<code>文件名不能包含 \ / :</code>），根源很可能就是 obsidian-git 插件——
+  <strong>它的作者在官方 README 里写了：手机端"非常不稳定，我不建议在手机上用这个插件"</strong>。
+  本手册换用他推荐的 GitSync，<strong>不需要任何 Obsidian 插件</strong>。
+</div>
+
+<h2><span class="n">1</span>在 Obsidian 建一个「本地」空 vault</h2>
+<ol>
+  <li>打开 Obsidian，进入仓库列表（左侧拉出菜单最下面）</li>
+  <li>点 <strong>Create new vault</strong>（新建仓库）</li>
+  <li>名字填 <code>读书</code></li>
+  <li><strong>把它里面的「Store in iCloud」关掉</strong> ← 这一步是关键</li>
+  <li>创建后<strong>里面保持空的</strong>，什么都别放</li>
+</ol>
+<div class="box">
+  <b>为什么必须是本地、必须空</b>
+  等下 GitSync 会把仓库内容<strong>直接倒进</strong>这个文件夹。vault 里有东西会被覆盖；
+  放 iCloud 里则可能因为同步机制打架。之前那个 iCloud 里的 vault 不用删，先放着。
+</div>
+
+<h2><span class="n">2</span>装 GitSync</h2>
+<p>App Store 搜 <strong>GitSync</strong>（图标是个绿色分支），或直接打开：<br>
+<a href="https://apps.apple.com/us/app/gitsync/id6744980427">apps.apple.com/us/app/gitsync/id6744980427</a></p>
+<p class="muted">免费。它是独立的 App，不是 Obsidian 插件。</p>
+
+<h2><span class="n">3</span>GitSync 首次引导</h2>
+<table>
+  <tr><th>它问你</th><th>你怎么选</th></tr>
+  <tr><td>欢迎页 <code>Let's Go</code></td><td>点它</td></tr>
+  <tr><td>怎么发现这个 App 的</td><td>随便选，或跳过</td></tr>
+  <tr><td><strong>Choose your focus</strong></td><td>选 <strong>Sync mode</strong></td></tr>
+  <tr><td>Premium / 付费页</td><td><strong>跳过</strong>，我们用不到</td></tr>
+  <tr><td>要不要通知权限</td><td><strong>允许</strong>（它用来提示后台同步状态）</td></tr>
+  <tr><td>选认证方式</td><td>保持 <strong>GitHub</strong>，点 <strong>OAuth</strong> 按钮</td></tr>
+  <tr><td>浏览器里登录 GitHub</td><td>用你的 <code>zzproc</code> 账号授权</td></tr>
+  <tr><td>Author details（用户名 / 邮箱）</td><td>填 <code>zzproc</code> 和你的 GitHub 邮箱</td></tr>
+</table>
+
+<h2><span class="n">4</span>克隆仓库</h2>
+<ol>
+  <li>OAuth 登录后，它会把你的仓库列出来 → <strong>选 <code>reading-vault</code></strong></li>
+  <li>问「选一个目录克隆进去」→ 选第 1 步建的那个 vault：<br>
+      <code>我的 iPhone → Obsidian → 读书</code></li>
+  <li>提示已存在内容、要不要覆盖 → <strong>选覆盖</strong></li>
+  <li>等它跑完（内容很小，几秒）</li>
+</ol>
+
+<h2><span class="n">5</span>打开 Obsidian 看一眼</h2>
+<p>切到 <code>读书</code> 这个仓库，应该能看到卡片和音频了。
+<strong>如果看到的是空的</strong>，回 GitSync 点一下 <strong>Sync Now</strong>，再回 Obsidian 看。</p>
+
+<h2><span class="n">6</span>设成自动同步（用「快捷指令」）</h2>
+<ol>
+  <li>打开 iPhone 的 <strong>快捷指令</strong> App → 底部 <strong>自动化</strong></li>
+  <li>新建自动化 → 触发条件选 <strong>App</strong> → <strong>打开时</strong>（也可加"关闭时"）</li>
+  <li>App 选 <strong>Obsidian</strong></li>
+  <li>动作搜索 <strong>GitSync</strong> → 选 <strong>Sync Now</strong></li>
+  <li>关掉「运行前询问」，保存</li>
+</ol>
+<div class="box ok">
+  <b>做到这一步就全通了</b>
+  以后你每次打开 Obsidian，它自动同步一次。罗辑在电脑上推了新卡片，你打开就能看到。
+</div>
+
+<h2>卡住了怎么办</h2>
+<table>
+  <tr><th>现象</th><th>怎么办</th></tr>
+  <tr><td>GitSync 里看不到 <code>reading-vault</code></td><td>说明 OAuth 授权没给到私有仓库权限。退出 GitSync 重新授权一次</td></tr>
+  <tr><td>克隆完 Obsidian 里还是空的</td><td>确认你打开的是第 1 步那个<strong>本地</strong> vault，不是 iCloud 那个</td></tr>
+  <tr><td>提示文件夹非空</td><td>第 1 步没建干净。删掉那个 vault 重建一个空的</td></tr>
+  <tr><td>还是报 <code>文件名不能包含 \ / :</code></td><td>把 obsidian-git 插件彻底卸掉再试——GitSync 不经过插件</td></tr>
+</table>
+
+<p class="muted" style="margin-top:28px">
+  有问题随时截屏给罗辑。<strong>这份手册本身也是可以改的</strong>——你卡在哪一步，我就把哪一步写细。
+</p>
+</div></body></html>
